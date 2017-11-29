@@ -74,16 +74,6 @@ my.formula <- y ~ x
 plot1 = ggplot(biometric_df3, aes(x=tot_leaf_area, y=shoot_mass_fw))+
   geom_point(size=4)+
   geom_smooth(method=lm, formula=y~x, se=FALSE, fullrange=FALSE)+
-  #geom_smooth(method=lm, formula=y~log(x), se=FALSE, fullrange=TRUE)+
-  #geom_smooth(method="lm", formula='y~x+I(x^2)', se=FALSE, fullrange=FALSE)+
-  #geom_smooth(method="loess", formula=y~x, se=FALSE, fullrange=FALSE)+
-  #scale_color_gradient(low="blue", high="orange")+
-  theme(panel.background=element_rect(fill="White"))+
-  theme(axis.line=element_line(colour="Black"))+
-  theme(axis.ticks=element_line(colour="Black"))+
-  theme(panel.grid.minor=element_line(colour="White"))+
-  theme(axis.text.x=element_text(colour="Black"))+
-  theme(axis.text.y=element_text(colour="Black"))+
   stat_poly_eq(formula = my.formula, 
                 aes(label = paste(..eq.label.., ..rr.label.., sep = "~~~")), 
                 parse = TRUE)
@@ -91,17 +81,7 @@ plot1 = ggplot(biometric_df3, aes(x=tot_leaf_area, y=shoot_mass_fw))+
 plot2 = ggplot(biometric_df3, aes(x=tot_leaf_area, y=shoot_mass_dw))+
   geom_point(size=4)+
   geom_smooth(method=lm, formula=y~x, se=FALSE, fullrange=FALSE)+
-  #geom_smooth(method=lm, formula=y~log(x), se=FALSE, fullrange=TRUE)+
-  #geom_smooth(method="lm", formula='y~x+I(x^2)', se=FALSE, fullrange=FALSE)+
-  #geom_smooth(method="loess", formula=y~x, se=FALSE, fullrange=FALSE)+
-  #scale_color_gradient(low="blue", high="orange")+
-  theme(panel.background=element_rect(fill="White"))+
-  theme(axis.line=element_line(colour="Black"))+
-  theme(axis.ticks=element_line(colour="Black"))+
-  theme(panel.grid.minor=element_line(colour="White"))+
-  theme(axis.text.x=element_text(colour="Black"))+
-  theme(axis.text.y=element_text(colour="Black"))+
-    stat_poly_eq(formula = my.formula, 
+  stat_poly_eq(formula = my.formula, 
                 aes(label = paste(..eq.label.., ..rr.label.., sep = "~~~")), 
                 parse = TRUE)
 

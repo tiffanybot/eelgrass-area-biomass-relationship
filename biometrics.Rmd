@@ -10,6 +10,104 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r}
-read.csv("~/Desktop/eelgrass_biometrics/eelgrass_biometrics.csv")
+biometric_df = read.csv("~/Desktop/eelgrass_biometrics/eelgrass_biometrics/biometrics.csv")
+```
+
+```{r}
+library(dplyr); library(tidyr)
+```
+
+```{r}
+biometric_df2 = biometric_df %>% 
+  select(site, collection_date, quadrat, plant, leaf_length1, leaf_length2, leaf_length3, leaf_length4, leaf_length5, leaf_length6, leaf_length7, leaf_length8, leaf_length9, leaf_length10, leaf_width1, leaf_width2, leaf_width3, leaf_width4, leaf_width5, leaf_width6, leaf_width7, leaf_width8, leaf_width9, leaf_width10, shoot_mass_fw, shoot_foil, shoot_foil_dw)
+
+unique(biometric_df2)
+```
+
+```{r}
+biometric_df2$shoot_mass_dw = biometric_df2$shoot_foil_dw - biometric_df2$shoot_foil
+```
+
+```{r}
+biometric_df2$leaf_area1 = biometric_df2$leaf_length1 * biometric_df2$leaf_width1
+biometric_df2$leaf_area2 = biometric_df2$leaf_length2 * biometric_df2$leaf_width2
+biometric_df2$leaf_area3 = biometric_df2$leaf_length3 * biometric_df2$leaf_width3
+biometric_df2$leaf_area4 = biometric_df2$leaf_length4 * biometric_df2$leaf_width4
+biometric_df2$leaf_area5 = biometric_df2$leaf_length5 * biometric_df2$leaf_width5
+biometric_df2$leaf_area6 = biometric_df2$leaf_length6 * biometric_df2$leaf_width6
+biometric_df2$leaf_area7 = biometric_df2$leaf_length7 * biometric_df2$leaf_width7
+biometric_df2$leaf_area8 = biometric_df2$leaf_length8 * biometric_df2$leaf_width8
+biometric_df2$leaf_area9 = biometric_df2$leaf_length9 * biometric_df2$leaf_width9
+biometric_df2$leaf_area10 = biometric_df2$leaf_length10 * biometric_df2$leaf_width10
+
+biometric_df2$tot_leaf_area <- rowSums(biometric_df2[,c("leaf_area1", "leaf_area2", "leaf_area3", "leaf_area4", "leaf_area5", "leaf_area6", "leaf_area7", "leaf_area8", "leaf_area9", "leaf_area10")], na.rm=TRUE)
+```
+
+```{r}
+biometric_df3 = biometric_df2 %>% 
+  select(site, collection_date, quadrat, plant, shoot_mass_fw, shoot_mass_dw, tot_leaf_area)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+library(ggplot2); library(devtools); library(ggpmisc)
+
+my.formula <- y ~ x
+plot1 = ggplot(biometric_df3, aes(x=tot_leaf_area, y=shoot_mass_fw))+
+  geom_point(size=4)+
+  geom_smooth(method=lm, formula=y~x, se=FALSE, fullrange=FALSE)+
+  #geom_smooth(method=lm, formula=y~log(x), se=FALSE, fullrange=TRUE)+
+  #geom_smooth(method="lm", formula='y~x+I(x^2)', se=FALSE, fullrange=FALSE)+
+  #geom_smooth(method="loess", formula=y~x, se=FALSE, fullrange=FALSE)+
+  #scale_color_gradient(low="blue", high="orange")+
+  theme(panel.background=element_rect(fill="White"))+
+  theme(axis.line=element_line(colour="Black"))+
+  theme(axis.ticks=element_line(colour="Black"))+
+  theme(panel.grid.minor=element_line(colour="White"))+
+  theme(axis.text.x=element_text(colour="Black"))+
+  theme(axis.text.y=element_text(colour="Black"))+
+  stat_poly_eq(formula = my.formula, 
+                aes(label = paste(..eq.label.., ..rr.label.., sep = "~~~")), 
+                parse = TRUE)
+
+plot2 = ggplot(biometric_df3, aes(x=tot_leaf_area, y=shoot_mass_dw))+
+  geom_point(size=4)+
+  geom_smooth(method=lm, formula=y~x, se=FALSE, fullrange=FALSE)+
+  #geom_smooth(method=lm, formula=y~log(x), se=FALSE, fullrange=TRUE)+
+  #geom_smooth(method="lm", formula='y~x+I(x^2)', se=FALSE, fullrange=FALSE)+
+  #geom_smooth(method="loess", formula=y~x, se=FALSE, fullrange=FALSE)+
+  #scale_color_gradient(low="blue", high="orange")+
+  theme(panel.background=element_rect(fill="White"))+
+  theme(axis.line=element_line(colour="Black"))+
+  theme(axis.ticks=element_line(colour="Black"))+
+  theme(panel.grid.minor=element_line(colour="White"))+
+  theme(axis.text.x=element_text(colour="Black"))+
+  theme(axis.text.y=element_text(colour="Black"))+
+    stat_poly_eq(formula = my.formula, 
+                aes(label = paste(..eq.label.., ..rr.label.., sep = "~~~")), 
+                parse = TRUE)
+
+plot(plot1)
+plot(plot2)
 ```
 

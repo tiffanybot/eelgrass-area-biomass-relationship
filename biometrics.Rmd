@@ -17,18 +17,18 @@ biometric_df = read.csv("~/Desktop/eelgrass_biometrics/eelgrass_biometrics/biome
 library(dplyr); library(tidyr)
 ```
 
-```{r}
+```{r, echo=FALSE}
 biometric_df2 = biometric_df %>% 
   select(site, collection_date, quadrat, plant, leaf_length1, leaf_length2, leaf_length3, leaf_length4, leaf_length5, leaf_length6, leaf_length7, leaf_length8, leaf_length9, leaf_length10, leaf_width1, leaf_width2, leaf_width3, leaf_width4, leaf_width5, leaf_width6, leaf_width7, leaf_width8, leaf_width9, leaf_width10, shoot_mass_fw, shoot_foil, shoot_foil_dw)
 
 unique(biometric_df2)
 ```
 
-```{r}
+```{r, echo=FALSE}
 biometric_df2$shoot_mass_dw = biometric_df2$shoot_foil_dw - biometric_df2$shoot_foil
 ```
 
-```{r}
+```{r, echo=FALSE}
 biometric_df2$leaf_area1 = biometric_df2$leaf_length1 * biometric_df2$leaf_width1
 biometric_df2$leaf_area2 = biometric_df2$leaf_length2 * biometric_df2$leaf_width2
 biometric_df2$leaf_area3 = biometric_df2$leaf_length3 * biometric_df2$leaf_width3
@@ -47,26 +47,6 @@ biometric_df2$tot_leaf_area <- rowSums(biometric_df2[,c("leaf_area1", "leaf_area
 biometric_df3 = biometric_df2 %>% 
   select(site, collection_date, quadrat, plant, shoot_mass_fw, shoot_mass_dw, tot_leaf_area)
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ```{r}

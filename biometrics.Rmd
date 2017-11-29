@@ -68,6 +68,7 @@ biometric_df3 = biometric_df2 %>%
 # plot regressions of "total leaf area * plant FW" and "total leaf area * plant DW"
 
 library(ggplot2); library(devtools); library(ggpmisc)
+theme_set(theme_classic())
 
 my.formula <- y ~ x
 plot1 = ggplot(biometric_df3, aes(x=tot_leaf_area, y=shoot_mass_fw))+

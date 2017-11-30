@@ -9,7 +9,7 @@ output: html_document
 ```{r, message = FALSE}
 # load file from project folder
 
-biometric_df = read.csv("https://raw.githubusercontent.com/APECS-ak/eelgrass_biometrics_2017/master/eelgrass_biometrics_2017_RAW.csv", stringsAsFactors = FALSE)
+biometric_df = read.csv("https://raw.githubusercontent.com/APECS-ak/eelgrass_biometrics_2017/master/seagrass_biometrics_2017_RAW.csv", stringsAsFactors = FALSE)
 ```
 
 ```{r, message = FALSE, warning = FALSE}

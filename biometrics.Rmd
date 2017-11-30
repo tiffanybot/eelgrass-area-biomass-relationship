@@ -1,24 +1,21 @@
 ---
-title: "eelgrass biometrics"
+title: "Cleaning raw data for 'eelgrass_biometric_2017_RAW.csv'"
 author: "Tiff Stephens"
-date: "11/28/2017"
+date: "11/30/2017"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
-```{r}
+```{r, message = FALSE}
 # load file from project folder
 
-biometric_df = read.csv("~/Desktop/eelgrass_biometrics/eelgrass_biometrics/biometrics.csv")
+biometric_df = read.csv("https://raw.githubusercontent.com/APECS-ak/eelgrass_biometrics_2017/master/eelgrass_biometrics_2017_RAW.csv", stringsAsFactors = FALSE)
 ```
 
-```{r}
+```{r, message = FALSE, warning = FALSE}
 # library packages
 
-library(dplyr); library(tidyr)
+library(dplyr); library(tidyr); library(ggplot2); library(ggpmisc)
 ```
 
 ```{r, echo=FALSE}
@@ -67,7 +64,6 @@ biometric_df3 = biometric_df2 %>%
 ```{r}
 # plot regressions of "total leaf area * plant FW" and "total leaf area * plant DW"
 
-library(ggplot2); library(devtools); library(ggpmisc)
 theme_set(theme_classic())
 
 my.formula <- y ~ x
